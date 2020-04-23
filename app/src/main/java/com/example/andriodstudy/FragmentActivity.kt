@@ -12,19 +12,24 @@ class FragmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
 
+        val fragment1 = BlankFragment1.newInstance("null", "null")
+
         button1.setOnClickListener {
-            switchFrame(BlankFragment1())
+            switchFrame(fragment1)
         }
+
+        val fragment2 = BlankFragment2.newInstance("null", "null")
         button2.setOnClickListener {
-            switchFrame(BlankFragment2())
+            switchFrame(fragment2)
         }
-        initFrame(BlankFragment1())
+        currentFragment = fragment1
+        initFrame(currentFragment as BlankFragment1)
 
     }
 
-    private fun initFrame(blankFragment1: BlankFragment1) {
+    private fun initFrame(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame, blankFragment1)
+        fragmentTransaction.replace(R.id.frame, fragment)
         fragmentTransaction.commit()
     }
 
@@ -38,6 +43,7 @@ class FragmentActivity : AppCompatActivity() {
             }
             fragmentTransaction
                 .add(R.id.frame, targetFragment)
+                .addToBackStack(null)  // 可以通过返回按钮返回上一个fragment
                 .commit()
             println("没有添加过")
         } else {
@@ -47,6 +53,7 @@ class FragmentActivity : AppCompatActivity() {
             }
             fragmentTransaction
                 .show(targetFragment)
+                .addToBackStack(null)
                 .commit()
             println("已经添加过")
         }
