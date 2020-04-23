@@ -3,7 +3,9 @@ package com.example.andriodstudy
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcel
@@ -21,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         title = "main"
         setContentView(R.layout.activity_main)
+
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION).apply {
+            addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        }
+        registerReceiver(MessageReceiver(), filter)
 
         toListView.setOnClickListener {
             startActivity(Intent(this, ListActivity::class.java))
