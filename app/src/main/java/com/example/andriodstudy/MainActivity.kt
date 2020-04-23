@@ -1,15 +1,17 @@
 package com.example.andriodstudy
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Resources
+import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v4.app.INotificationSideChannel
 import android.view.Window
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +26,36 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, ListActivity::class.java))
         }
 
+        music.setOnClickListener {
+            startActivity(Intent(this, NewMusicActivity::class.java))
+        }
+
         callButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:1355555555")))
+            val parse = Uri.parse("tel:13311112222")
+            println("parse=======${parse}")
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CALL_PHONE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    Array(1) { Manifest.permission.CALL_PHONE },
+                    1
+                )
+            }
+            startActivity(Intent(Intent.ACTION_CALL, parse))
         }
 
         msgButton.setOnClickListener {
-            Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:1355555555")).also { myIntent ->
-                myIntent.putExtra("sms_body", "smsBodyXXXXXXXXXXX")
-                startActivity(myIntent);
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_SMS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                Toast.makeText(this, "开启读取短信的权限", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, MessageActivity::class.java))
             }
         }
 
@@ -52,21 +76,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        println("======== result: ${data}")
-        // Check which request we're responding to
         if (requestCode == 100) {
-            // Make sure the request was successful
             if (resultCode == Activity.RESULT_OK) {
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
                 resultText.text = data?.getStringExtra("result")
-                // Do something with the contact here (bigger example below)
             }
         }
     }
-
-
 }
+
 
 data class Person(val name: String, val age: Int, val photo: String) : Parcelable {
     constructor(parcel: Parcel) : this(

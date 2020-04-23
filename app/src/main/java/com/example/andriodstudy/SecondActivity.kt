@@ -22,15 +22,14 @@ class SecondActivity : AppCompatActivity() {
         val field = R.mipmap::class.java.getField(person?.photo.toString())
         val id = field.getInt(field)
         photo.findViewById<ImageView>(R.id.photo).setImageResource(id)
-
-        saveButton.setOnClickListener {
-            val myIntent = Intent()
-            myIntent.putExtra("result", textInput.text.toString())
-            setResult(Activity.RESULT_OK, myIntent)
-            finish()
-        }
     }
 
+    override fun finish() {
+        val myIntent = Intent()
+        myIntent.putExtra("result", textInput.text.toString())
+        setResult(Activity.RESULT_OK, myIntent)
+        super.finish()
+    }
 
     override fun onStop() {
         super.onStop()

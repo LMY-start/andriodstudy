@@ -43,10 +43,10 @@
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginTop="81dp"
-        android:text="下一页"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="84dp"
+        android:text="去有数据返回的页面"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/msgButton" />
 
@@ -54,9 +54,9 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="20dp"
         android:text="返回結果"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +64,14 @@
 
     <TextView
         android:id="@+id/resultText"
-        android:layout_width="196dp"
-        android:layout_height="165dp"
+        android:textColor="#E91E63"
+        android:gravity="center"
+        android:background="@drawable/edit_text_bg"
+        android:layout_width="195dp"
+        android:layout_height="104dp"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="480dp"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,4 +86,15 @@
         android:text="去Frame页面"
         app:layout_constraintStart_toEndOf="@+id/toListView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="102dp"
+        android:layout_marginLeft="102dp"
+        android:layout_marginTop="69dp"
+        android:text="music"
+        app:layout_constraintStart_toEndOf="@+id/callButton"
+        app:layout_constraintTop_toBottomOf="@+id/toFrameButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
