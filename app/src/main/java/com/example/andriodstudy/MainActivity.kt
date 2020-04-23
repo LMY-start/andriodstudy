@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         toFrameButton.setOnClickListener {
-            startActivity(Intent(this, ThirdActivity::class.java))
+            startActivity(Intent(this, FragmentActivity::class.java))
         }
     }
 

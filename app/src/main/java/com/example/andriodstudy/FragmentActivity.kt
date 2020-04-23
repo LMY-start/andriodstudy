@@ -3,14 +3,14 @@ package com.example.andriodstudy
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_third.*
+import kotlinx.android.synthetic.main.activity_fragment.*
 
-class ThirdActivity : AppCompatActivity() {
+class FragmentActivity : AppCompatActivity() {
 
     var currentFragment: Fragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_third)
+        setContentView(R.layout.activity_fragment)
 
         button1.setOnClickListener {
             switchFrame(BlankFragment1())

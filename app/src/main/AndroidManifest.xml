@@ -47,7 +47,7 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".ThirdActivity" />
+        <activity android:name=".FragmentActivity" />
         <activity android:name=".SecondActivity" />
         <activity android:name=".ListActivity" />
         <activity
