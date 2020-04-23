@@ -8,13 +8,12 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         nextButton.setOnClickListener {
             val bundle = Bundle()
             println("=========next")
-            bundle.putParcelable("person", Person("lisi", 23, "tx"))
+            bundle.putSerializable("person", Person("lisi", 23, "tx"))
             Intent(this, SecondActivity::class.java).also { myIntent ->
                 myIntent.putExtras(bundle)
                 startActivityForResult(myIntent, 100)
@@ -92,30 +91,4 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-data class Person(val name: String, val age: Int, val photo: String) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString().toString(),
-        parcel.readInt(),
-        parcel.readString().toString()
-    )
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeString(name)
-        dest.writeInt(age)
-        dest.writeString(photo)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Person> {
-        override fun createFromParcel(parcel: Parcel): Person {
-            return Person(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Person?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+data class Person(val name: String, val age: Int, val photo: String) : Serializable
